@@ -2,25 +2,33 @@
 import { ethers } from "ethers";
 //import * as fs from "fs-extra"
 import * as fs from "fs";
+import "dotenv/config";
+
 async function main() {
-  //HTTP://127.0.0.1:7545
-  const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545");
-  const wallet = new ethers.Wallet(
-    "0xf52e2ea1cfe7c1eae4999f13f1caa6574ff9f2e3c4e428f9b57748c0f32d23d3",
-    provider
-  );
   const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
-  console.log(`abi: ${abi}`);
+  //console.log(`abi: ${abi}`);
   const binary = fs.readFileSync(
     "./SimpleStorage_sol_SimpleStorage.bin",
     "utf8"
   );
 
+  const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
+  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, provider);
+
+  // const encryptedJson = fs.readFileSync("./encryptedKey.json", "utf8");
+  // console.log(encryptedJson);
+  // let wallet = await ethers.Wallet.fromEncryptedJson(
+  //   encryptedJson,
+  //   process.env.PRIVATE_KEY_PASSWORD!
+  // );
+
+  // wallet = wallet.connect(provider);
+
   const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
   console.log("deploying..., please wait");
   const contract = await contractFactory.deploy();
   const deploymentReceipt = await contract.deploymentTransaction()?.wait(1);
-  console.log(deploymentReceipt);
+  //console.log(deploymentReceipt);
   const address = await contract.getAddress();
   console.log(`Contract deployed to ${address}`);
 
