@@ -8,6 +8,8 @@ yarn add dotenv
 
 yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleStorage.sol
 
+ts-node deploy.ts
+
 sepolia's contract address:
 PS H:\web3\web3\hardhat\ethers-simple-storage> npx tsx .\deploy.ts
 deploying..., please wait
