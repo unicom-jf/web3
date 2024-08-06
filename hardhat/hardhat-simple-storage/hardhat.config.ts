@@ -1,7 +1,10 @@
 import "@nomicfoundation/hardhat-ethers";
+import "hardhat-gas-reporter";
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "dotenv/config";
+//import "solidity-coverage";
+
 import "./tasks/block-number";
 task("accounts", "prints accounts", async (args, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -41,6 +44,13 @@ const config: HardhatUserConfig = {
       },
     ],
     */
+  },
+  gasReporter: {
+    enabled: false,
+    outputFile: "gas-reporter.txt",
+    noColors: true,
+    currency: "USD",
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
   },
 };
 
