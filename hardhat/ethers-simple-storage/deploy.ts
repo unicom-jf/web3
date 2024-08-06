@@ -33,13 +33,13 @@ async function main() {
   console.log(`Contract deployed to ${address}`);
 
   let response = await //contract!.connect(signer!) as ethers.Contract
-  (contract as ethers.Contract).retreive();
+  (contract as ethers.Contract).retrieve();
   console.log(`currNum: ${response}`);
   console.log("update favoriteNumber...");
   const txResponse = await (contract as ethers.Contract).store(77);
   const txReceipt = await txResponse.wait(1);
   response = await //contract!.connect(signer!) as ethers.Contract
-  (contract as ethers.Contract).retreive();
+  (contract as ethers.Contract).retrieve();
   console.log(`currNum: ${response}`);
 
   // const nonce = await wallet.getNonce();

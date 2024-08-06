@@ -1,3 +1,4 @@
+import "@nomicfoundation/hardhat-ethers";
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "dotenv/config";
@@ -13,7 +14,7 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: "96a7e910-6907-42d3-b9d3-c21e0a96721f",
+    apiKey: process.env.ETHERSCAN_API_KEY,
     customChains: [
       {
         network: "sepolia",
